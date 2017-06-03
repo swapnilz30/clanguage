@@ -10,19 +10,30 @@ struct bank
 };
 
 void menu();
-void check_balance(struct bank b);
+void check_balance();
 void deposit(struct bank b);
 void withdraw(struct bank b);
 
 void main()
 {
 
+	struct bank b;
 	printf("Welcome to ABC bank.\n");
         menu();	
 
 	printf("Enter account no: ");
 	scanf("%d",&b.accountno);
 	
+	switch(b.accountno)
+	{
+		case 1:
+			b.balance = 10000;
+			check_balance(b);
+			break;
+		default:
+			printf("Enter correct account number\n");
+			break;
+	}
 	//Write the switch case for account number and another switch case for transaction options.
 }
 
@@ -36,9 +47,12 @@ void menu()
 
 void check_balance(struct bank b)
 {
-	b.balance = 10000;
-	printf("Your current balance is %d", b.balance);
+	printf("Your current balance is %d\n", b.balance);
 }
+
+/*void deposite(struct bank b)
+{*/
+	
 
 
 
