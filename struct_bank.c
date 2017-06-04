@@ -1,18 +1,19 @@
 #include<stdio.h>
-
+#include<stdlib.h>
 // Function: Menu,Deposit, Withdrawal, check balance 
 
 struct bank
 {
 	int accountno;
 	float amount,balance;
-	char trans;
+	char trans,flag;
 };
 
 void menu();
 void check_balance(struct bank b);
 void deposite(struct bank b);
 void withdrawal(struct bank b);
+void transaction(struct bank b);
 
 void main()
 {
@@ -24,37 +25,26 @@ void main()
 	printf("Enter account no: ");
 	scanf("%d",&b.accountno);
 	
-	switch(b.accountno)
+		transaction(b);
+	do
 	{
-		case 1:
-			b.balance = 10000.00;
-			menu();
-			scanf(" %c", &b.trans);
-			switch(b.trans)
-			{
-				case 'b':
-					check_balance(b);
-					break;
-				case 'd':
-					printf("Enter the amount for deposite.\n");
-					scanf("%f",&b.amount);
-					deposite(b);
-					break;
-				case 'w':
-					printf("Enter the amount to withdrawal.\n");
-					scanf("%f",&b.amount);
-					withdrawal(b);
-					break;
-				default:
-					printf("Enter correct option for transaction.\n");
-					break;
-			}
+		printf("If you want to continue with trasaction then press c or e for exit.\n");
+		scanf(" c",&b.flag);
+		switch(b.flag)
+		{
+			case 'c': 
+				transaction(b);
+				break;
 
-			break;
-		default:
-			printf("Enter correct account number\n");
-			break;
-	}
+			case 'e': 
+				exit(0);
+				break;
+
+		        default:
+				printf("Enter correct option. Press c to continue or Press e for exit.\n");
+				break;
+		}
+	}while(1);	
 	//Write the switch case for account number and another switch case for transaction options.
 }
 
@@ -93,7 +83,41 @@ void withdrawal(struct bank b)
 	}
 }	
 
+void transaction(struct bank b)
+{
 
+	switch(b.accountno)
+	{
+		case 1:
+			b.balance = 10000.00;
+			menu();
+			scanf(" %c", &b.trans);
+			switch(b.trans)
+			{
+				case 'b':
+					check_balance(b);
+					break;
+				case 'd':
+					printf("Enter the amount for deposite.\n");
+					scanf("%f",&b.amount);
+					deposite(b);
+					break;
+				case 'w':
+					printf("Enter the amount to withdrawal.\n");
+					scanf("%f",&b.amount);
+					withdrawal(b);
+					break;
+				default:
+					printf("Enter correct option for transaction.\n");
+					break;
+			}
+
+			break;
+		default:
+			printf("Enter correct account number\n");
+			break;
+	}
+}
 
 
 
