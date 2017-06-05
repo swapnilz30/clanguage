@@ -5,7 +5,7 @@
 struct bank
 {
 	int accountno;
-	float amount,balance;
+	double amount,balance;
 	char trans,flag;
 };
 
@@ -29,7 +29,7 @@ void main()
 	do
 	{
 		printf("If you want to continue with trasaction then press c or e for exit.\n");
-		scanf(" c",&b.flag);
+		scanf(" %c",&b.flag);
 		switch(b.flag)
 		{
 			case 'c': 
@@ -45,7 +45,6 @@ void main()
 				break;
 		}
 	}while(1);	
-	//Write the switch case for account number and another switch case for transaction options.
 }
 
 void menu()
@@ -57,29 +56,33 @@ void menu()
 
 void check_balance(struct bank b)
 {
-	printf("Your current balance is %f\n", b.balance);
+	printf("Your current balance is %lf\n", b.balance);
 }
 
 void deposite(struct bank b)
 {
-	b.balance = b.balance + b.amount;
-	printf("Your current balance is: %f\n", b.balance);
+	if(b.amount <= 10000.0000)
+	{
+		b.balance = b.balance + b.amount;
+		printf("Your current balance is: %lf\n", b.balance);
+	}
+	else
+	{
+		printf("Deposite limit is less than or = to 10000\n");
+	}
 }
 
 void withdrawal(struct bank b)
 {
-	if(b.balance < b.amount) 
+	if(b.balance < b.amount || b.amount > 10000.0000) 
 	{
 		printf("You have insufficient amount\n");
-	}
-	if(b.balance > 10000)
-	{
 		printf("Daily withdrawal limit is 10000\n");
 	}
-	if(b.balance >= b.amount)	
+	else
 	{
 		b.balance = b.balance - b.amount;
-		printf("Your current balance is: %f\n", b.balance);
+		printf("Your current balance is: %lf\n", b.balance);
 	}
 }	
 
@@ -89,7 +92,7 @@ void transaction(struct bank b)
 	switch(b.accountno)
 	{
 		case 1:
-			b.balance = 10000.00;
+			b.balance = 10000.0000;
 			menu();
 			scanf(" %c", &b.trans);
 			switch(b.trans)
@@ -99,12 +102,12 @@ void transaction(struct bank b)
 					break;
 				case 'd':
 					printf("Enter the amount for deposite.\n");
-					scanf("%f",&b.amount);
+					scanf("%lf",&b.amount);
 					deposite(b);
 					break;
 				case 'w':
 					printf("Enter the amount to withdrawal.\n");
-					scanf("%f",&b.amount);
+					scanf("%lf",&b.amount);
 					withdrawal(b);
 					break;
 				default:
@@ -118,8 +121,3 @@ void transaction(struct bank b)
 			break;
 	}
 }
-
-
-
-
-  

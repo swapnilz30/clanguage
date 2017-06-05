@@ -25,7 +25,7 @@ void main()
 				printf("You have entered 2nd option in the menu.\n");
 				break;
 			case 3:
-				printf("You have entered 3rd` option in the menu.\n");
+				printf("You have entered 3rd option in the menu.\n");
 				break;
 			case 4:
 				exit(0);
